@@ -11,7 +11,7 @@
  * @wordpress-plugin
  * Plugin Name:	        {eac}SoftwareRegistry Distribution SDK
  * Description:	        Software Registration Server Distribution SDK - generate custom PHP packages that can be include in your project to register your product with your registration server.
- * Version:	            1.1.2
+ * Version:	            1.1.3
  * Requires at least:   5.8
  * Tested up to:        6.8
  * Requires PHP:        7.4
@@ -31,7 +31,7 @@
 
 namespace EarthAsylumConsulting;
 
-define('EAC_SOFTWARE_REGISTRY_SDK', dirname(__FILE__));
+define('EAC_SOFTWARE_REGISTRY_SDK', __DIR__);
 
 class eacSoftwareRegistry_Distribution_SDK
 {

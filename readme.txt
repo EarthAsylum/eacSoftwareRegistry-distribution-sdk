@@ -1,8 +1,8 @@
 === {eac}SoftwareRegistry Distribution SDK ===
 Plugin URI:         https://swregistry.earthasylum.com/software-registry-sdk/
 Author:             [EarthAsylum Consulting](https://www.earthasylum.com)
-Stable tag:         1.1.2
-Last Updated:       19-Apr-2025
+Stable tag:         1.1.3
+Last Updated:       25-Jul-2025
 Requires at least:  5.8
 Tested up to:       6.7
 Requires PHP:       7.4
@@ -22,7 +22,7 @@ Github URI:         https://github.com/EarthAsylum/eacsoftwareregistry-distribut
 
 The Software Registry Distribution SDK is used to generate a custom PHP package that you can include in your software project to register your product with your registration server and manage that registration.
 
-_A custom version of this "readme.txt" file is included in the generated SDK package._
+_A custom version of this document is included in the generated SDK package._
 
 The SDK provides most of the PHP code you will need to implement the Application Program Interface with your Software Registration Server.
 
@@ -33,6 +33,7 @@ Included with the Software Registration SDK package...
 +   `(your_productid)_registration.interface.php`
 +   `(your_productid)_registration.interface.trait.php`
 +   `(your_productid)_registration.refresh.php`
++   `(your_productid)_registration.readme.md`
 
 
 = Software Registry Implementation =
@@ -91,6 +92,7 @@ API parameters are passed as an array:
         'registry_sites'        => array('url',...),                //   array of valid/registered sites/uris
         'registry_transid'      => '',                              //   external transaction id
         'registry_timezone'     => '',                              //   standard timezone string (client timezone)
+        'registry_locale'       => '',                              //   standard locale/language code
     ];
 
 \* *Required values (registry_key not required when creating a new registration).*
@@ -103,8 +105,8 @@ Although typically set by the Software Registry server, with the proper option s
 
     [
         'registry_status'       => 'status',                        // 'pending', 'trial', 'active', 'inactive', 'expired', 'terminated'
-        'registry_effective'    => 'YYYY-MM-DD',                    // Effective date (Y-m-d)
-        'registry_expires'      => 'YYYY-MM-DD',                    // Expiration date (Y-m-d) or term ('30 days', '1 year',... added to effective date)
+        'registry_effective'    => 'DD-MMM-YYYY',                   // Effective date
+        'registry_expires'      => 'DD-MMM-YYYY',                   // Expiration date or term ('30 days', '1 year',... added to effective date)
     ];
 
 Payment information may be posted with:
@@ -112,9 +114,9 @@ Payment information may be posted with:
     [
         'registry_paydue'       => float,                           // amount to be paid/billed,
         'registry_payamount'    => float,                           // amount paid,
-        'registry_paydate'      => 'YYYY-MM-DD',                    // date paid
+        'registry_paydate'      => 'DD-MMM-YYYY',                   // date paid
         'registry_payid'        => 'payment id'                     // transaction id/check #, etc.
-        'registry_nextpay'      => 'YYYY-MM-DD',                    // next payment/renewal date
+        'registry_nextpay'      => 'DD-MMM-YYYY',                   // next payment/renewal date
     ];
 
 
@@ -151,62 +153,74 @@ The API response is a standard object. status->code is an http status, 200 indic
 
     status      ->
     (
-        'code'                  -> 200,             // HTTP status code
-        'message'               -> '(action) ok'    // (action) = 'create', 'activate', 'deactivate', 'verify', 'revise'
+        code                  -> 200,             // HTTP status code
+        message               -> '(action) ok'    // (action) = 'create', 'activate', 'deactivate', 'verify', 'revise'
     ),
     registration ->
     (
-        'registry_key'          -> string           // UUID,
-        'registry_status'       -> string,          // 'pending', 'trial', 'active', 'inactive', 'expired', 'terminated', 'invalid'
-        'registry_effective'    -> string,          // DD-MMM-YYYY effective date
-        'registry_expires'      -> string,          // DD-MMM-YYYY expiration date
-        'registry_name'         -> string,
-        'registry_email'        -> string,
-        'registry_company'      -> string,
-        'registry_address'      -> string,
-        'registry_phone'        -> string,
-        'registry_product'      -> string,
-        'registry_title'        -> string,
-        'registry_description'  -> string,
-        'registry_version'      -> string,
-        'registry_license'      -> string,
-        'registry_count'        -> int,
-        'registry_variations'   -> array,
-        'registry_options'      -> array,
-        'registry_domains'      -> array,
-        'registry_sites'        -> array,
-        'registry_transid'      -> string,
-        'registry_timezone'     -> string,
-        'registry_valid'        -> bool,            // true/false
+        registry_key          -> string           // UUID,
+        registry_status       -> string,          // 'pending', 'trial', 'active', 'inactive', 'expired', 'terminated', 'invalid'
+        registry_effective    -> string,          // DD-MMM-YYYY effective date
+        registry_expires      -> string,          // DD-MMM-YYYY expiration date
+        registry_name         -> string,
+        registry_email        -> string,
+        registry_company      -> string,
+        registry_address      -> string,
+        registry_phone        -> string,
+        registry_product      -> string,
+        registry_title        -> string,
+        registry_description  -> string,
+        registry_version      -> string,
+        registry_license      -> string,
+        registry_count        -> int,
+        registry_variations   -> array,
+        registry_options      -> array,
+        registry_domains      -> array,
+        registry_sites        -> array,
+        registry_transid      -> string,
+        registry_timezone     -> string,
+        registry_locale       -> string,
+        registry_valid        -> bool,
     ),
     registrar ->
     (
-        'contact'               -> object(
-            'name'              -> string           // Registrar Name
-            'email'             -> string           // Registrar Support Email
-            'phone'             -> string           // Registrar Telephone
-            'web'               -> string           // Registrar Web Address
+        contact               -> object(
+            name              -> string           // Registrar Name
+            email             -> string           // Registrar Support Email
+            phone             -> string           // Registrar Telephone
+            web               -> string           // Registrar Web Address
         ),
-        'cacheTime'             -> int,             // in seconds, time to cache the registration response (Default Cache Time)
-        'refreshInterval'       -> int,             // in seconds, time before refreshing the registration (Default Refresh Time)
-        'refreshSchedule'       -> string,          // 'hourly','twicedaily','daily','weekly' corresponding to refreshInterval
-        'options'               -> array(           // from settings page, registrar_options (Allow API to...)
+        timezone              -> string,          // standard timezone string
+        locale                -> string,          // WordPress locale
+        cacheTime             -> int,             // in seconds, time to cache the registration response (Default Cache Time)
+        refreshInterval       -> int,             // in seconds, time before refreshing the registration (Default Refresh Time)
+        refreshSchedule       -> string,          // 'hourly', 'twicedaily', 'daily', 'twiceweekly', 'weekly',  'twicemonthly', 'monthly' - corresponding to refreshInterval
+        options               -> array(           // from settings page, registrar_options (Allow API to...)
             'allow_set_key',
             'allow_set_status',
             'allow_set_effective',
             'allow_set_expiration',
             'allow_activation_update'
         ),
-        'notices'               -> object(
-            'info'              -> string,          // information message text
-            'warning'           -> string,          // warning message text
-            'error'             -> string,          // error message text
-            'success'           -> string,          // success message text
+        licenseCodes          -> object(          // may be changed by filter on registration server
+            L1                -> 'Lite'
+            L2                -> 'Basic'
+            L3                -> 'Standard'
+            L4                -> 'Professional'
+            L5                -> 'Enterprise'
+            LD                -> 'Developer'
+            LU                -> 'Unlimited'
         ),
-        'message'               -> string,          // html message
+        notices               -> object(
+            info              -> string,          // information message text
+            warning           -> string,          // warning message text
+            error             -> string,          // error message text
+            success           -> string,          // success message text
+        ),
+        message               -> string,          // html message
     ),
-    registryHtml                -> string,          // html (table) of human-readable registration values
-    supplemental                -> mixed,           // supplemental data/html assigned via filters (developer's discretion).
+    registryHtml              -> string,          // html (table) of human-readable registration values
+    supplemental              -> mixed,           // supplemental data/html assigned via filters (developer's discretion).
 
 On a successful response (status->code = 200), the SDK will automatically cache the registration data and schedule the next refresh event (you do not have to do this).
 
@@ -220,8 +234,8 @@ On an error response, an additional element is included:
 
     error      ->
     (
-        'code'                  -> 'error_code',
-        'message'               -> 'error message'
+        code                  -> 'error_code',
+        message               -> 'error message'
     ),
 
 error->message may be more informative than status->message.
@@ -321,6 +335,12 @@ Example:
         }
     }
 
+Note:
+
+If your primary plugin file name is not the same as the product id, edit your `(your_productid).interface.tpl` file and change the `SOFTWARE_REGISTRY_FILENAME` constant.
+
+        const SOFTWARE_REGISTRY_FILENAME    = 'myPluginName';
+
 
 **For Other File Based Projects**
 
@@ -344,7 +364,7 @@ Example:
             ...
         public function __destruct()
         {
-            /* if necessary, set HOME and/or TMP/TMPDIR/TEMP directories */
+            /* if necessary, set HOME/USERPROFILE and/or TMP/TMPDIR/TEMP directories */
             // putenv('HOME={your home directory}');   // where the registration key is stored, otherwise use $_SERVER['DOCUMENT_ROOT']
             // putenv('TMP={your temp directory}');    // where the registration data is stored, otherwise use sys_get_temp_dir()
             $this->checkRegistryRefreshEvent();
@@ -422,6 +442,15 @@ You should receive a copy of the GNU General Public License along with this prog
 
 
 == Changelog ==
+
+= Version 1.1.3 – July 25, 2025 =
+
++   Added `SOFTWARE_REGISTRY_FILENAME` in softwareregistry.interface.
+    +   Defaults to `SOFTWARE_REGISTRY_PRODUCTID`.
+    +   Manually change if plugin file name is not the same as the product id.
++   Date formats documented as `DD-MMM-YYYY`.
++   Use `registrar->timezone` when comparing dates (effective, expires).
++   Add timestamp to download link (cache buster).
 
 = Version 1.1.2 – April 19, 2025 =
 

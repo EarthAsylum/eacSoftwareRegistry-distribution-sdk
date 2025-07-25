@@ -7,7 +7,7 @@ namespace EarthAsylumConsulting\Extensions;
  * @category	WordPress Plugin
  * @package		{eac}SoftwareRegistry
  * @author		Kevin Burkholder <KBurkholder@EarthAsylum.com>
- * @copyright	Copyright (c) 2024 EarthAsylum Consulting <www.earthasylum.com>
+ * @copyright	Copyright (c) 2025 EarthAsylum Consulting <www.earthasylum.com>
  */
 
 class eacSoftwareRegistry_distribution_SDK extends \EarthAsylumConsulting\abstract_extension
@@ -20,7 +20,7 @@ class eacSoftwareRegistry_distribution_SDK extends \EarthAsylumConsulting\abstra
 	/**
 	 * @var string extension version
 	 */
-	const VERSION	= '24.1123.1';
+	const VERSION	= '25.0725.1';
 
 
 	/**
@@ -103,13 +103,14 @@ class eacSoftwareRegistry_distribution_SDK extends \EarthAsylumConsulting\abstra
 				);
 				$downloads = [];
 				foreach ($packages as $file) {
-					$fdate = wp_date($this->plugin->date_time_format,filemtime($file));
+					$ftime = filemtime($file);
+					$fdate = wp_date($this->plugin->date_time_format,$ftime);
 					$file = str_replace($_SERVER['DOCUMENT_ROOT'],'',$file);
 					$downloads[ '_'.basename($file,$suffix) ] = array(
 										'type'		=> 	'display',
 										'label'		=> 	basename($file,$suffix),
 										'default'	=> 	(class_exists( '\ZipArchive' ))
-														? "<a href='{$file}' download='".basename($file)."'>".basename($file)."</a>"
+														? "<a href='{$file}?{$ftime}' download='".basename($file)."'>".basename($file)."</a>"
 														: '...'.str_replace(WP_PLUGIN_DIR,'',$root.'/'.basename($file)),
 										'info'		=> 'Download the registration package for '.basename($file,$suffix). ' created '.$fdate,
 									);
@@ -118,7 +119,7 @@ class eacSoftwareRegistry_distribution_SDK extends \EarthAsylumConsulting\abstra
 										'type'		=> 	'display',
 										'label'		=> 	'<span class="dashicons dashicons-info-outline"></span>',
 										'default'	=>	"After downloading (and extracting) your distribution file, ".
-														"move the folder to your project and see the package readme.txt file for implementation instructions. ",
+														"move the folder to your project and see the package readme.md file for implementation instructions. ",
 									);
 				$this->registerExtensionOptions( ['Download Registration Package', 'distribution' ], $downloads );
 			}
@@ -185,9 +186,9 @@ class eacSoftwareRegistry_distribution_SDK extends \EarthAsylumConsulting\abstra
 				$fs->mkdir($dirName,0775);
 			}
 
-			// readme.txt
-			$fileName = $dirName."/{$baseName}.readme.txt";
-			$contents = $fs->get_contents(EAC_SOFTWARE_REGISTRY_SDK.'/readme.txt');
+			// readme.md
+			$fileName = $dirName."/{$baseName}.readme.md";
+			$contents = $fs->get_contents(EAC_SOFTWARE_REGISTRY_SDK.'/readme.md');
 			$contents = str_replace(
 				[
 					'(your_productid)',
