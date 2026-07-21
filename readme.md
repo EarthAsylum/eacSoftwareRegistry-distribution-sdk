@@ -1,17 +1,18 @@
-## {eac}SoftwareRegistry Distribution SDK  
+## {eac}SoftwareRegistry Distribution SDK
 [![EarthAsylum Consulting](https://img.shields.io/badge/EarthAsylum-Consulting-0?&labelColor=6e9882&color=707070)](https://earthasylum.com/)
 [![WordPress](https://img.shields.io/badge/WordPress-Plugins-grey?logo=wordpress&labelColor=blue)](https://wordpress.org/plugins/search/EarthAsylum/)
 [![eacDoojigger](https://img.shields.io/badge/Requires-%7Beac%7DDoojigger-da821d)](https://eacDoojigger.earthasylum.com/)
+[![Sponsorship](https://img.shields.io/static/v1?label=Sponsorship&message=%E2%9D%A4&logo=GitHub&color=bf3889)](https://github.com/sponsors/EarthAsylum)
 
 <details><summary>Plugin Header</summary>
 
 Plugin URI:         https://swregistry.earthasylum.com/software-registry-sdk/  
 Author:             [EarthAsylum Consulting](https://www.earthasylum.com)  
-Stable tag:         1.1.3  
-Last Updated:       25-Jul-2025  
+Stable tag:         1.1.4  
+Last Updated:       20-Jul-2026  
 Requires at least:  5.8  
-Tested up to:       6.7  
-Requires PHP:       7.4  
+Tested up to:       7.0  
+Requires PHP:       8.1  
 Contributors:       [kevinburkholder](https://profiles.wordpress.org/kevinburkholder)  
 Donate link:        https://github.com/sponsors/EarthAsylum  
 License:            GPLv3 or later  
@@ -440,7 +441,7 @@ Options for this extension will be added to the *Software Registry » Settings �
 
 ### Copyright
 
-#### Copyright © 2019-2025, EarthAsylum Consulting, distributed under the terms of the GNU GPL.
+#### Copyright © 2019-2026, EarthAsylum Consulting, distributed under the terms of the GNU GPL.
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.  
 

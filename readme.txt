@@ -1,11 +1,11 @@
 === {eac}SoftwareRegistry Distribution SDK ===
 Plugin URI:         https://swregistry.earthasylum.com/software-registry-sdk/
 Author:             [EarthAsylum Consulting](https://www.earthasylum.com)
-Stable tag:         1.1.3
-Last Updated:       25-Jul-2025
+Stable tag:         1.1.4
+Last Updated:       20-Jul-2026
 Requires at least:  5.8
-Tested up to:       6.7
-Requires PHP:       7.4
+Tested up to:       7.0
+Requires PHP:       8.1
 Contributors:       kevinburkholder
 Donate link:        https://github.com/sponsors/EarthAsylum
 License:            GPLv3 or later
@@ -432,7 +432,7 @@ Options for this extension will be added to the *Software Registry » Settings �
 
 == Copyright ==
 
-= Copyright © 2019-2025, EarthAsylum Consulting, distributed under the terms of the GNU GPL. =
+= Copyright © 2019-2026, EarthAsylum Consulting, distributed under the terms of the GNU GPL. =
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
@@ -442,6 +442,10 @@ You should receive a copy of the GNU General Public License along with this prog
 
 
 == Changelog ==
+
+= Version 1.1.4 – July 20, 2026 =
+
++   Compatible with WordPress 7.0.
 
 = Version 1.1.3 – July 25, 2025 =
 
