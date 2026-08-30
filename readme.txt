@@ -1,18 +1,19 @@
 === {eac}SoftwareRegistry Distribution SDK ===
 Plugin URI:         https://swregistry.earthasylum.com/software-registry-sdk/
-Author:             [EarthAsylum Consulting](https://www.earthasylum.com)
-Stable tag:         1.1.4
-Last Updated:       20-Jul-2026
+Stable tag:         1.1.5
+Last Updated:       30-Aug-2026
 Requires at least:  5.8
 Tested up to:       7.1
 Requires PHP:       8.1
-Contributors:       kevinburkholder
+Author:				EarthAsylum Consulting
+Author URI:			http://www.earthasylum.com
+Contributors:       KevinBurkholder
 Donate link:        https://github.com/sponsors/EarthAsylum
 License:            GPLv3 or later
 License URI:        https://www.gnu.org/licenses/gpl.html
 Tags:               software registration, software registry, software license, license manager, registration API, registration SDK, {eac}SoftwareRegistry
 WordPress URI:      https://wordpress.org/plugins/eacsoftwareregistry-distribution-sdk
-Github URI:         https://github.com/EarthAsylum/eacsoftwareregistry-distribution-sdk
+Github URI:         https://github.com/EarthAsylum/eacSoftwaReregistry-distribution-sdk
 
 {eac}SoftwareRegistry Distribution SDK for the Software Registration Server - Implementing the Software Registry SDK Package.
 
@@ -442,6 +443,14 @@ You should receive a copy of the GNU General Public License along with this prog
 
 
 == Changelog ==
+
+= Version 1.1.5 – August 30, 2026 =
+
++   Compatible with WordPress 7.1.
++	Admin notification on missing required plugin.
++	Aesthetic/Nonstructural changes...
+	+	WP plugins page links.
+	+	Plugin DocBlocks, readme headers, etc.
 
 = Version 1.1.4 – July 20, 2026 =
 

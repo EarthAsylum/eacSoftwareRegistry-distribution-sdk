@@ -6,12 +6,15 @@
  * @package		{eac}SoftwareRegistry Distribution SDK
  * @author		Kevin Burkholder <KBurkholder@EarthAsylum.com>
  * @copyright	Copyright (c) 2026 EarthAsylum Consulting <www.earthasylum.com>
- * @uses		{eac}SoftwareRegistry
+ * @link		https://swregistry.earthasylum.com/
+ * @link 		https://swregistry.earthasylum.com/software-registry-sdk/
+ * @link 		https://wordpress.org/plugins/eacsoftwareregistry-distribution-sdk
+ * @link 		https://github.com/EarthAsylum/eacSoftwaReregistry-distribution-sdk
  *
  * @wordpress-plugin
  * Plugin Name:	        {eac}SoftwareRegistry Distribution SDK
  * Description:	        Software Registration Server Distribution SDK - generate custom PHP packages that can be include in your project to register your product with your registration server.
- * Version:	            1.1.4
+ * Version:	            1.1.5
  * Requires at least:   5.8
  * Tested up to:        7.1
  * Requires PHP:        8.1
@@ -30,6 +33,20 @@
  */
 
 namespace EarthAsylumConsulting;
+
+if (!class_exists('\\EarthAsylumConsulting\\eacSoftwareRegistry',false))
+{
+	\add_action( 'admin_notices', function()
+		{
+			echo '<div class="notice notice-error is-dismissible">'.
+				 '<em>{eac}SoftwareRegistry Distribution SDK</em> '.
+				 'requires installation & activation of '.
+				 '<a href="https://swregistry.earthasylum.com/software-registration-server/" target="_blank">'.
+				 '{eac}SoftwareRegistry</a>.</div>';
+		}
+	);
+	return;
+}
 
 define('EAC_SOFTWARE_REGISTRY_SDK', __DIR__);
 
@@ -50,26 +67,29 @@ class eacSoftwareRegistry_Distribution_SDK
 		 */
 		add_filter( 'eacSoftwareRegistry_load_extensions',	function($extensionDirectories)
 			{
-				/*
-    			 * Enable update notice (self hosted or wp hosted)
-    			 */
-				eacSoftwareRegistry::loadPluginUpdater(__FILE__,'wp');
+				if (is_admin())
+				{
+					/*
+					 * Enable update notice (self hosted or wp hosted)
+					 */
+					eacSoftwareRegistry::loadPluginUpdater(__FILE__,'wp');
 
-				/*
-    			 * Add links on plugins page
-    			 */
-				add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ),function($pluginLinks, $pluginFile, $pluginData)
-					{
-						return array_merge(
-							[
-								'settings'		=> eacSoftwareRegistry::getSettingsLink($pluginData,'distribution'),
-								'documentation'	=> eacSoftwareRegistry::getDocumentationLink($pluginData),
-								'support'		=> eacSoftwareRegistry::getSupportLink($pluginData),
-							],
-							$pluginLinks
-						);
-					},20,3
-				);
+					/*
+					 * Add links on plugins page
+					 */
+					add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ),function($pluginLinks, $pluginFile, $pluginData)
+						{
+							return array_merge(
+								[
+									'settings'		=> eacSoftwareRegistry::getSettingsLink($pluginData,'distribution'),
+									'documentation'	=> eacSoftwareRegistry::getDocumentationLink($pluginData),
+									'support'		=> eacSoftwareRegistry::getSupportLink($pluginData),
+								],
+								$pluginLinks
+							);
+						},20,3
+					);
+				}
 
 				/*
     			 * Add our extension to load

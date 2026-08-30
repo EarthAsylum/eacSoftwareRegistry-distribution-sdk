@@ -7,19 +7,20 @@
 <details><summary>Plugin Header</summary>
 
 Plugin URI:         https://swregistry.earthasylum.com/software-registry-sdk/  
-Author:             [EarthAsylum Consulting](https://www.earthasylum.com)  
-Stable tag:         1.1.4  
-Last Updated:       20-Jul-2026  
+Stable tag:         1.1.5  
+Last Updated:       30-Aug-2026  
 Requires at least:  5.8  
 Tested up to:       7.1  
 Requires PHP:       8.1  
-Contributors:       [kevinburkholder](https://profiles.wordpress.org/kevinburkholder)  
+Author:				EarthAsylum Consulting  
+Author URI:			http://www.earthasylum.com  
+Contributors:       [KevinBurkholder](https://profiles.wordpress.org/KevinBurkholder)  
 Donate link:        https://github.com/sponsors/EarthAsylum  
 License:            GPLv3 or later  
 License URI:        https://www.gnu.org/licenses/gpl.html  
 Tags:               software registration, software registry, software license, license manager, registration API, registration SDK, {eac}SoftwareRegistry  
 WordPress URI:      https://wordpress.org/plugins/eacsoftwareregistry-distribution-sdk  
-Github URI:         https://github.com/EarthAsylum/eacsoftwareregistry-distribution-sdk  
+Github URI:         https://github.com/EarthAsylum/eacSoftwaReregistry-distribution-sdk  
 
 </details>
 
