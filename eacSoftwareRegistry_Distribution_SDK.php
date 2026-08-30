@@ -19,7 +19,7 @@
  * Tested up to:        7.1
  * Requires PHP:        8.1
  * Plugin URI:        	https://swregistry.earthasylum.com/software-registry-sdk/
- * Author Name:			EarthAsylum Consulting
+ * Author:				EarthAsylum Consulting
  * Author URI:			http://www.earthasylum.com
  * License: 			GPLv3 or later
  * License URI: 		https://www.gnu.org/licenses/gpl.html
