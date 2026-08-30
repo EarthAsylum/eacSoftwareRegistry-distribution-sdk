@@ -1,12 +1,11 @@
 === {eac}SoftwareRegistry Distribution SDK ===
 Plugin URI:         https://swregistry.earthasylum.com/software-registry-sdk/
+Author:             [EarthAsylum Consulting](https://www.earthasylum.com)
 Stable tag:         1.1.5
 Last Updated:       30-Aug-2026
 Requires at least:  5.8
 Tested up to:       7.1
 Requires PHP:       8.1
-Author:				EarthAsylum Consulting
-Author URI:			http://www.earthasylum.com
 Contributors:       KevinBurkholder
 Donate link:        https://github.com/sponsors/EarthAsylum
 License:            GPLv3 or later
@@ -446,7 +445,7 @@ You should receive a copy of the GNU General Public License along with this prog
 
 = Version 1.1.5 – August 30, 2026 =
 
-+   Compatible with WordPress 7.1.
++	Compatible with WordPress 7.1.
 +	Admin notification on missing required plugin.
 +	Aesthetic/Nonstructural changes...
 	+	WP plugins page links.
