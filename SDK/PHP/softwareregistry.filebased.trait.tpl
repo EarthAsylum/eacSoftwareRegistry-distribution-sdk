@@ -9,8 +9,8 @@ namespace EarthAsylumConsulting\Traits;
  * @category	WordPress Plugin
  * @package		{eac}SoftwareRegistry
  * @author		Kevin Burkholder <KBurkholder@EarthAsylum.com>
- * @copyright	Copyright (c) 2025 EarthAsylum Consulting <www.EarthAsylum.com>
- * @version		25.0725.1
+ * @copyright	Copyright (c) 2026 EarthAsylum Consulting <www.EarthAsylum.com>
+ * @version		26.1026.1
  */
 
 trait softwareregistry_filebased
@@ -32,7 +32,7 @@ trait softwareregistry_filebased
 	 *
 	 * @return object|bool scheduled event or false
 	 */
-	public function nextRegistryRefreshEvent(string $registrationKey=null)
+	public function nextRegistryRefreshEvent(?string $registrationKey = null)
 	{
 		$result = $this->getKeyFilePath(self::SOFTWARE_REGISTRY_OPTION);
 		if (is_file($result) && ($result = \file_get_contents($result)))
@@ -48,7 +48,7 @@ trait softwareregistry_filebased
 	 *
 	 * @return void
 	 */
-	public function checkRegistryRefreshEvent(string $registrationKey=null)
+	public function checkRegistryRefreshEvent(?string $registrationKey = null)
 	{
 		if ($result = $this->nextRegistryRefreshEvent($registrationKey))
 		{
@@ -182,7 +182,7 @@ trait softwareregistry_filebased
 	 * @param string registration key
 	 * @return string
 	 */
-	public function getRegistrationKey(string $registrationKey=null)
+	public function getRegistrationKey(?string $registrationKey = null)
 	{
 		if (!empty($registrationKey))
 		{

@@ -1,11 +1,11 @@
 === {eac}SoftwareRegistry Distribution SDK ===
 Plugin URI:         https://swregistry.earthasylum.com/software-registry-sdk/
 Author:             [EarthAsylum Consulting](https://www.earthasylum.com)
-Stable tag:         1.1.5
-Last Updated:       30-Aug-2026
+Stable tag:         1.2.0
+Last Updated:       28-Oct-2026
 Requires at least:  5.8
 Tested up to:       7.1
-Requires PHP:       8.1
+Requires PHP:       8.2
 Contributors:       KevinBurkholder
 Donate link:        https://github.com/sponsors/EarthAsylum
 License:            GPLv3 or later
@@ -442,6 +442,16 @@ You should receive a copy of the GNU General Public License along with this prog
 
 
 == Changelog ==
+
+= Version 1.2.0 – October 28, 2026 =
+
++	Requires PHP 8.2+.
++	Compatible with PHP 8.4+.
++   Fixed Implicitly marking parameter as nullable (?string).
++	Fixed usort() return value.
++	Increased registryApiRequest timeout from 6 to 12 seconds.
++	Implemented new `dependency.php` script for automation of dependency installation.
++	Output distribution to WP uploads folder (not plugin sub-folder).
 
 = Version 1.1.5 – August 30, 2026 =
 

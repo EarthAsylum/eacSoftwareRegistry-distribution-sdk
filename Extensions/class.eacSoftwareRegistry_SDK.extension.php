@@ -7,7 +7,7 @@ namespace EarthAsylumConsulting\Extensions;
  * @category	WordPress Plugin
  * @package		{eac}SoftwareRegistry
  * @author		Kevin Burkholder <KBurkholder@EarthAsylum.com>
- * @copyright	Copyright (c) 2025 EarthAsylum Consulting <www.earthasylum.com>
+ * @copyright	Copyright (c) 2026 EarthAsylum Consulting <www.earthasylum.com>
  */
 
 class eacSoftwareRegistry_distribution_SDK extends \EarthAsylumConsulting\abstract_extension
@@ -20,7 +20,7 @@ class eacSoftwareRegistry_distribution_SDK extends \EarthAsylumConsulting\abstra
 	/**
 	 * @var string extension version
 	 */
-	const VERSION	= '25.0725.1';
+	const VERSION	= '26.1028.1';
 
 
 	/**
@@ -52,11 +52,11 @@ class eacSoftwareRegistry_distribution_SDK extends \EarthAsylumConsulting\abstra
 	{
 		global $wp_filesystem;
 		$fs = apply_filters('eacDoojigger_load_filesystem',$wp_filesystem,true,'WordPress file access is required to create SoftwareRegistry SDK packages.');
-		$root = EAC_SOFTWARE_REGISTRY_SDK.'/SDK/distributions';
-		if ($fs && $fs->is_dir($root) && $fs->is_writable($root))
+		$outputRoot = $this->output_path($fs); //EAC_SOFTWARE_REGISTRY_SDK.'/SDK/distributions';
+		if ($fs && $fs->is_dir($outputRoot) && $fs->is_writable($outputRoot))
 		{
 			// make sure directory is writeable w/out fs (user & group permission)
-			$fs->chmod($root,FS_CHMOD_DIR|0660);
+			$fs->chmod($outputRoot,FS_CHMOD_DIR|0660);
 			$this->registerExtensionOptions( ['Create Registration Package', 'distribution' ],
 				[
 					'_distribute_display'	=> array(
@@ -94,11 +94,12 @@ class eacSoftwareRegistry_distribution_SDK extends \EarthAsylumConsulting\abstra
 			);
 
 			$suffix		= (class_exists( '\ZipArchive' )) ? '_registration.zip' : '_registration';
-			$packages 	= (class_exists( '\ZipArchive' )) ? glob($root.'/*'.$suffix) : glob($root.'/*'.$suffix,GLOB_ONLYDIR);
+			$packages 	= (class_exists( '\ZipArchive' )) ? glob($outputRoot.'/*'.$suffix) : glob($outputRoot.'/*'.$suffix,GLOB_ONLYDIR);
 			if (! empty($packages)) {
 				usort($packages,function($file1, $file2)
 					{
-						return filemtime($file1) < filemtime($file2);
+						return (filemtime($file1) < filemtime($file2)) ? -1 : 1;
+
 					}
 				);
 				$downloads = [];
@@ -111,7 +112,7 @@ class eacSoftwareRegistry_distribution_SDK extends \EarthAsylumConsulting\abstra
 										'label'		=> 	basename($file,$suffix),
 										'default'	=> 	(class_exists( '\ZipArchive' ))
 														? "<a href='{$file}?{$ftime}' download='".basename($file)."'>".basename($file)."</a>"
-														: '...'.str_replace(WP_PLUGIN_DIR,'',$root.'/'.basename($file)),
+														: '...'.str_replace(WP_PLUGIN_DIR,'',$outputRoot.'/'.basename($file)),
 										'info'		=> 'Download the registration package for '.basename($file,$suffix). ' created '.$fdate,
 									);
 				}
@@ -175,7 +176,7 @@ class eacSoftwareRegistry_distribution_SDK extends \EarthAsylumConsulting\abstra
 		}
 		$baseName 		= $productName.'_registration';
 		$root 			= EAC_SOFTWARE_REGISTRY_SDK.'/SDK';
-		$dirName 		= $root.'/distributions/'.$baseName;
+		$dirName 		= $this->output_path($fs).'/'.$baseName;
 		$traitName 		= $baseName;
 		$traitName 		.= ($productType == 'wordpress') ? '_wordpress' : '_filebased';
 
@@ -315,6 +316,23 @@ class eacSoftwareRegistry_distribution_SDK extends \EarthAsylumConsulting\abstra
 			echo "<script>window.location.reload()</script>";
 			die();
 		}
+	}
+
+
+	/**
+	 * Get the output path
+	 *
+	 */
+	public function output_path($fs)
+	{
+		$pathName = wp_get_upload_dir()['basedir'];
+		foreach (['eacSoftwareRegistry','distributions'] as $dirName) {
+			$pathName .= DIRECTORY_SEPARATOR.$dirName;
+			if (! is_dir($pathName)) {
+				$fs->mkdir($pathName,FS_CHMOD_DIR|0660);
+			}
+		}
+		return $pathName;
 	}
 }
 /**

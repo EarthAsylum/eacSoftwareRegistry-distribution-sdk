@@ -8,11 +8,11 @@
 
 Plugin URI:         https://swregistry.earthasylum.com/software-registry-sdk/  
 Author:             [EarthAsylum Consulting](https://www.earthasylum.com)  
-Stable tag:         1.1.5  
-Last Updated:       30-Aug-2026  
+Stable tag:         1.2.0  
+Last Updated:       28-Oct-2026  
 Requires at least:  5.8  
 Tested up to:       7.1  
-Requires PHP:       8.1  
+Requires PHP:       8.2  
 Contributors:       [KevinBurkholder](https://profiles.wordpress.org/KevinBurkholder)  
 Donate link:        https://github.com/sponsors/EarthAsylum  
 License:            GPLv3 or later  

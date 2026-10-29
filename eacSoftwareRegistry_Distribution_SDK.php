@@ -14,10 +14,10 @@
  * @wordpress-plugin
  * Plugin Name:	        {eac}SoftwareRegistry Distribution SDK
  * Description:	        Software Registration Server Distribution SDK - generate custom PHP packages that can be include in your project to register your product with your registration server.
- * Version:	            1.1.5
+ * Version:	            1.2.0
  * Requires at least:   5.8
  * Tested up to:        7.1
- * Requires PHP:        8.1
+ * Requires PHP:        8.2
  * Plugin URI:        	https://swregistry.earthasylum.com/software-registry-sdk/
  * Author:				EarthAsylum Consulting
  * Author URI:			http://www.earthasylum.com
@@ -34,18 +34,15 @@
 
 namespace EarthAsylumConsulting;
 
-if (!class_exists('\\EarthAsylumConsulting\\eacSoftwareRegistry',false))
+if (! class_exists( 'EarthAsylumConsulting\eacSoftwareRegistry', false ) )
 {
-	\add_action( 'admin_notices', function()
-		{
-			echo '<div class="notice notice-error is-dismissible">'.
-				 '<em>{eac}SoftwareRegistry Distribution SDK</em> '.
-				 'requires installation & activation of '.
-				 '<a href="https://swregistry.earthasylum.com/software-registration-server/" target="_blank">'.
-				 '{eac}SoftwareRegistry</a>.</div>';
-		}
-	);
-	return;
+	require_once 'dependency.php';
+	return dependency::notice([
+		'plugin'	=>	[ '{eac}SoftwareRegistry Distribution SDK' => plugin_basename( __FILE__ ) ],
+		'requires'	=> 	[ '{eac}SoftwareRegistry' => 'eacSoftwareRegistry/eacSoftwareRegistry.php' ],
+		'manifest'	=> 'https://swregistry.earthasylum.com/software-updates/eacSoftwareRegistry.json',
+		'after'		=> '/wp-admin/edit.php?post_type=softwareregistry&page=eacsoftwareregistry-settings&tab=registration'
+	]);
 }
 
 define('EAC_SOFTWARE_REGISTRY_SDK', __DIR__);
