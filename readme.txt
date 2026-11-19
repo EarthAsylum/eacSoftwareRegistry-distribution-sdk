@@ -1,16 +1,16 @@
 === {eac}SoftwareRegistry Distribution SDK ===
 Plugin URI:         https://swregistry.earthasylum.com/software-registry-sdk/
 Author:             [EarthAsylum Consulting](https://www.earthasylum.com)
-Stable tag:         1.2.0
-Last Updated:       28-Oct-2026
-Requires at least:  5.8
+Stable tag:         1.2.1
+Last Updated:       19-Nov-2026
+Requires at least:  5.9
 Tested up to:       7.1
 Requires PHP:       8.2
 Contributors:       KevinBurkholder
 Donate link:        https://github.com/sponsors/EarthAsylum
 License:            GPLv3 or later
 License URI:        https://www.gnu.org/licenses/gpl.html
-Tags:               software registration, software registry, software license, license manager, registration API, registration SDK, {eac}SoftwareRegistry
+Tags:               software registration, software license, license manager, registration SDK, {eac}SoftwareRegistry
 WordPress URI:      https://wordpress.org/plugins/eacsoftwareregistry-distribution-sdk
 Github URI:         https://github.com/EarthAsylum/eacSoftwaReregistry-distribution-sdk
 
@@ -442,6 +442,12 @@ You should receive a copy of the GNU General Public License along with this prog
 
 
 == Changelog ==
+
+= Version 1.2.1 – November 19, 2026 =
+
++	Addressed concerns generated from WordPress Plugin Checker.
++	Updated dependency.php.
++	Updated WordPress Requires at least to 5.9.
 
 = Version 1.2.0 – October 28, 2026 =
 

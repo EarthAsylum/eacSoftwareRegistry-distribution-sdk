@@ -10,6 +10,8 @@ namespace EarthAsylumConsulting\Extensions;
  * @copyright	Copyright (c) 2026 EarthAsylum Consulting <www.earthasylum.com>
  */
 
+defined( 'ABSPATH' ) or exit;
+
 class eacSoftwareRegistry_distribution_SDK extends \EarthAsylumConsulting\abstract_extension
 {
 	/**
@@ -20,7 +22,7 @@ class eacSoftwareRegistry_distribution_SDK extends \EarthAsylumConsulting\abstra
 	/**
 	 * @var string extension version
 	 */
-	const VERSION	= '26.1028.1';
+	const VERSION	= '26.1119.1';
 
 
 	/**
@@ -51,6 +53,7 @@ class eacSoftwareRegistry_distribution_SDK extends \EarthAsylumConsulting\abstra
 	public function admin_options_settings()
 	{
 		global $wp_filesystem;
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		$fs = apply_filters('eacDoojigger_load_filesystem',$wp_filesystem,true,'WordPress file access is required to create SoftwareRegistry SDK packages.');
 		$outputRoot = $this->output_path($fs); //EAC_SOFTWARE_REGISTRY_SDK.'/SDK/distributions';
 		if ($fs && $fs->is_dir($outputRoot) && $fs->is_writable($outputRoot))
@@ -106,13 +109,15 @@ class eacSoftwareRegistry_distribution_SDK extends \EarthAsylumConsulting\abstra
 				foreach ($packages as $file) {
 					$ftime = filemtime($file);
 					$fdate = wp_date($this->plugin->date_time_format,$ftime);
-					$file = str_replace($_SERVER['DOCUMENT_ROOT'],'',$file);
+					$docRoot = $this->plugin->varServer('DOCUMENT_ROOT');
+					$file = str_replace($docRoot,'',$file);
 					$downloads[ '_'.basename($file,$suffix) ] = array(
 										'type'		=> 	'display',
 										'label'		=> 	basename($file,$suffix),
 										'default'	=> 	(class_exists( '\ZipArchive' ))
 														? "<a href='{$file}?{$ftime}' download='".basename($file)."'>".basename($file)."</a>"
 														: '...'.str_replace(WP_PLUGIN_DIR,'',$outputRoot.'/'.basename($file)),
+										'after'		=>	$fdate,
 										'info'		=> 'Download the registration package for '.basename($file,$suffix). ' created '.$fdate,
 									);
 				}
@@ -166,11 +171,12 @@ class eacSoftwareRegistry_distribution_SDK extends \EarthAsylumConsulting\abstra
 	public function form_request_create_distribution($value, $fieldName, $metaData, $priorValue)
 	{
 		global $wp_filesystem;
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		if (! ($fs = apply_filters('eacDoojigger_load_filesystem',$wp_filesystem)) ) return;
 
-		$productName 	= $this->plugin->_POST('_distribute_product');
-		$productType 	= ($this->plugin->_POST('_distribute_type') == 'WordPress') ? 'wordpress' : 'filebased';
-		$namespace 		= $this->plugin->_POST('_distribute_namespace');
+		$productName 	= $this->plugin->varPost('_distribute_product');
+		$productType 	= ($this->plugin->varPost('_distribute_type') == 'WordPress') ? 'wordpress' : 'filebased';
+		$namespace 		= $this->plugin->varPost('_distribute_namespace');
 		if (!empty($namespace)) {
 			$namespace 	= '\\'.$namespace;
 		}

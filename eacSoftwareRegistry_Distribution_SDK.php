@@ -1,4 +1,6 @@
 <?php
+namespace EarthAsylumConsulting;
+
 /**
  * EarthAsylum Consulting {eac} Software Registration Server - Distribution SDK
  *
@@ -14,25 +16,21 @@
  * @wordpress-plugin
  * Plugin Name:	        {eac}SoftwareRegistry Distribution SDK
  * Description:	        Software Registration Server Distribution SDK - generate custom PHP packages that can be include in your project to register your product with your registration server.
- * Version:	            1.2.0
- * Requires at least:   5.8
- * Tested up to:        7.1
+ * Version:	            1.2.1
+ * Requires at least:   5.9
  * Requires PHP:        8.2
  * Plugin URI:        	https://swregistry.earthasylum.com/software-registry-sdk/
  * Author:				EarthAsylum Consulting
  * Author URI:			http://www.earthasylum.com
  * License: 			GPLv3 or later
  * License URI: 		https://www.gnu.org/licenses/gpl.html
- * Text Domain:			eacSoftwareRegistry
- * Domain Path:			/languages
  */
 
 /**
  * This simple plugin file responds to the 'eacSoftwareRegistry_load_extensions' filter to load additional extensions.
  * Using this method prevents overwriting extensions when the plugin is updated or reinstalled.
  */
-
-namespace EarthAsylumConsulting;
+defined( 'ABSPATH' ) or exit;
 
 if (! class_exists( 'EarthAsylumConsulting\eacSoftwareRegistry', false ) )
 {
